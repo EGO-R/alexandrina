@@ -1,0 +1,81 @@
+# Общие файлы и папки для игнорирования
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.log
+logs/
+tmp/
+temp/
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+
+# Frontend (Next.js)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.cache/
+frontend/coverage/
+frontend/build/
+frontend/dist/
+frontend/.vercel
+frontend/.turbo
+frontend/.swc/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.pnpm-debug.log*
+frontend/.env*.local
+
+# Backend (Spring Boot)
+backend/target/
+backend/.gradle/
+backend/build/
+backend/out/
+backend/bin/
+backend/HELP.md
+backend/.settings/
+backend/!**/src/main/**/target/
+backend/!**/src/test/**/target/
+
+# Docker
+.docker/
+docker-volumes/
+
+# NodeJS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Тестовые файлы и отчеты
+coverage/
+*.lcov
+.nyc_output/
+
+# Другое
+*.pid
+*.seed
+*.pid.lock
+.lock-wscript
+lib-cov
+.grunt
+.npm
+.eslintcache
+.stylelintcache
+.node_repl_history 

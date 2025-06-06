@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog.users-1.0.sql
+  - include:
+      file: db/changelog/db.changelog.auth-1.0.sql
+  - include:
+      file: db/changelog/db.changelog.videos-1.0.sql
+  - include:
+      file: db/changelog/db.changelog.playlists-1.0.sql

@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: a
+    password: a
+    username: a
+    driver-class-name: org.postgresql.Driver
+  jooq:
+    sql-dialect: postgres
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: a
+            client-secret: a
+            scope:
+              - email
+              - profile
+
+jwt:
+  secret: aaaaaaaaaaacnsvhrvrjhvzuivheruvxr,uvbrhvkbzhvbhbvhrvbhzbv,hbvhzjbv,jzr,bvhz,bvz,rjvbjz,vbhjnvl,zjhbvhjl,v
+
+s3:
+  key-id: a
+  secret-key: a
+  region: a
+  endpoint: https://storage.yandexcloud.net
+  bucket: a
+  temp-bucket: a

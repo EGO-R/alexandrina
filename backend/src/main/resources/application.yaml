@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: backend
+  datasource:
+    url: ${PG_URL}
+    password: ${PG_PASSWORD}
+    username: ${PG_USERNAME}
+    driver-class-name: org.postgresql.Driver
+  jooq:
+    sql-dialect: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # вместо JWK‑url используем local secret
+          secret-key: ${JWT_SECRET:change-me-supersecret}
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+jwt:
+  secret: ${JWT_SECRET:change-me-supersecret}
+#  servlet:
+#    multipart:
+#      max-file-size: ${MAX_SIZE:5MB}
+#      max-request-size: ${MAX_SIZE:5MB}
+logging:
+  level:
+    root: info
+s3:
+  key-id: ${S3_KEY_ID}
+  secret-key: ${S3_SECRET_KEY}
+  region: ${S3_REGION:ru-central1}
+  endpoint: ${S3_ENDPOINT}
+  bucket: ${S3_BUCKET}
+  temp-bucket: ${S3_BUCKET_TEMP}
+server:
+  port: ${PORT:8080}

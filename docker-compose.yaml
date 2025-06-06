@@ -1,0 +1,79 @@
+name: "alexandrina"
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - alexandrina-network
+    restart: unless-stopped
+
+  frontend:
+    build: 
+      context: ./frontend
+      args:
+        - NEXT_PUBLIC_API_URL=/api
+        - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+        - NEXT_PUBLIC_S3_BASE_URL=${NEXT_PUBLIC_S3_BASE_URL:-https://storage.yandexcloud.net}
+        - NEXT_PUBLIC_S3_BUCKET=${NEXT_PUBLIC_S3_BUCKET:-alexandrina}
+    # Порт 3000 теперь не надо публиковать наружу, так как доступ будет через nginx
+    # ports:
+    #   - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - alexandrina-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    # Порт 8080 теперь не надо публиковать наружу, так как доступ будет через nginx
+    # ports:
+    #   - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - PG_URL=jdbc:postgresql://db:5432/${POSTGRES_DB:-alexandrina}
+      - PG_USERNAME=${POSTGRES_USER:-postgres}
+      - PG_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - JWT_SECRET=${JWT_SECRET:-default_jwt_secret_key}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - S3_KEY_ID=${S3_KEY_ID}
+      - S3_SECRET_KEY=${S3_SECRET_KEY}
+      - S3_REGION=${S3_REGION}
+      - S3_ENDPOINT=${S3_ENDPOINT}
+      - S3_BUCKET=${S3_BUCKET}
+      - S3_BUCKET_TEMP=${S3_BUCKET_TEMP}
+      - BASE_URL=http://${HOST_NAME:-localhost}/api
+    networks:
+      - alexandrina-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-alexandrina}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - alexandrina-network
+    restart: unless-stopped
+
+networks:
+  alexandrina-network:
+    driver: bridge
+
+volumes:
+  postgres_data: 
