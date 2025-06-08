@@ -15,11 +15,11 @@ export const usePlaylists = () => {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [currentPlaylist, setCurrentPlaylist] = useState<PlaylistWithVideos | null>(null);
 
-  const getPlaylists = useCallback(async () => {
+  const getPlaylists = useCallback(async (userId?: number) => {
     setLoading(true);
     setError(null);
     try {
-      const data = await fetchPlaylists();
+      const data = await fetchPlaylists(userId);
       
       // Проверяем, что полученные данные являются массивом
       if (!Array.isArray(data)) {

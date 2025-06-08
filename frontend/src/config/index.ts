@@ -83,6 +83,7 @@ export const API_ENDPOINTS = {
   },
   playlists: {
     list: `/api/playlists`,
+    getUserPlaylists: (userId: number) => `/api/playlists/users/${userId}`,
     get: (id: number) => `/api/playlists/${id}`,
     create: `/api/playlists`,
     update: (id: number) => `/api/playlists/${id}`,

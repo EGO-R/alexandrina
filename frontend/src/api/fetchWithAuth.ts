@@ -15,8 +15,8 @@ export async function fetchWithAuth(input: RequestInfo, init?: RequestInit) {
         Logger.debug(`API Request: ${typeof input === 'string' ? input : input.url}`, {
             method: init?.method || 'GET'
         });
-        
-        const response = await fetch(input, { ...init, headers });
+
+    const response = await fetch(input, { ...init, headers });
 
         if (!response.ok) {
             // Получаем тело ответа
@@ -48,14 +48,14 @@ export async function fetchWithAuth(input: RequestInfo, init?: RequestInit) {
                 } else if (!url.includes('oauth2')) {
                     // Только для обычных API-вызовов, не для OAuth
                     Logger.warn(`Unauthorized request: ${url}`);
-                    store.dispatch(clearAuthData());
-                    
+            store.dispatch(clearAuthData());
+            
                     // Только перенаправляем, если мы не на странице логина или регистрации
                     if (typeof window !== 'undefined' && 
                         !window.location.pathname.includes('/login') && 
                         !window.location.pathname.includes('/register')) {
-                        window.location.href = '/login';
-                    }
+                window.location.href = '/login';
+            }
                     
                     errorMessage = 'Необходима авторизация';
                 }
@@ -67,9 +67,9 @@ export async function fetchWithAuth(input: RequestInfo, init?: RequestInit) {
             });
             
             throw new Error(errorMessage);
-        }
+    }
 
-        return response;
+    return response;
     } catch (error) {
         if (error instanceof Error) {
             Logger.error(`Fetch error: ${error.message}`, error);

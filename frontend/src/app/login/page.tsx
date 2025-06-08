@@ -72,49 +72,49 @@ export default function LoginPage() {
                     </Suspense>
                 </SearchParamsErrorContext.Provider>
 
-                {error && (
+            {error && (
                     <div className="mb-6 p-4 bg-danger/10 border border-danger/20 text-danger rounded-lg flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span>{error}</span>
-                    </div>
-                )}
+                </div>
+            )}
 
                 <form onSubmit={handleLogin} className="space-y-5">
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-1">
                             Email
                         </label>
-                        <input
+                <input
                             id="email"
-                            type="email"
+                    type="email"
                             placeholder="Введите email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                             className="w-full"
-                            required
-                        />
+                    required
+                />
                     </div>
                     
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium text-text-secondary mb-1">
                             Пароль
                         </label>
-                        <input
+                <input
                             id="password"
-                            type="password"
+                    type="password"
                             placeholder="Введите пароль"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                             className="w-full"
-                            required
-                        />
+                    required
+                />
                     </div>
                     
-                    <button
-                        type="submit"
-                        disabled={loading}
+                <button
+                    type="submit"
+                    disabled={loading}
                         className="btn btn-primary w-full py-3"
                     >
                         {loading ? (
@@ -126,8 +126,8 @@ export default function LoginPage() {
                                 Вход...
                             </span>
                         ) : 'Войти'}
-                    </button>
-                </form>
+                </button>
+            </form>
 
                 <div className="relative my-6">
                     <div className="absolute inset-0 flex items-center">
@@ -143,20 +143,20 @@ export default function LoginPage() {
                     className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm bg-white dark:bg-gray-800 text-text-primary hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                 >
                     <svg viewBox="0 0 24 24" width="16" height="16" className="mr-2">
-                        <path
-                            fill="#4285F4"
+                        <path 
+                            fill="#4285F4" 
                             d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"
                         />
-                        <path
-                            fill="#34A853"
+                        <path 
+                            fill="#34A853" 
                             d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-3.98v3.09c1.97 3.92 6.02 6.62 10.71 6.62z"
                         />
-                        <path
-                            fill="#FBBC05"
+                        <path 
+                            fill="#FBBC05" 
                             d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29v-3.09h-3.98c-.81 1.61-1.27 3.41-1.27 5.38s.46 3.77 1.27 5.38l3.98-3.09z"
                         />
-                        <path
-                            fill="#EA4335"
+                        <path 
+                            fill="#EA4335" 
                             d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42c-2.07-1.94-4.78-3.13-8.02-3.13-4.69 0-8.74 2.7-10.71 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"
                         />
                     </svg>
@@ -166,8 +166,8 @@ export default function LoginPage() {
                 <div className="mt-8 text-center">
                     <span className="text-text-secondary">Ещё нет аккаунта? </span>
                     <Link href="/register" className="text-primary hover:text-primary-hover font-medium transition-colors">
-                        Зарегистрироваться
-                    </Link>
+                    Зарегистрироваться
+                </Link>
                 </div>
             </div>
         </main>

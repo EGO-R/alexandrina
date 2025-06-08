@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { usePlaylists } from '@/hooks/usePlaylists';
+import { useAuth } from '@/hooks/useAuth';
 import { Video } from '@/types';
 import { getVideoPlaylists } from '@/api/videos';
 
@@ -10,13 +11,16 @@ interface AddToPlaylistModalProps {
 
 export default function AddToPlaylistModal({ video, onClose }: AddToPlaylistModalProps) {
   const { playlists, loading: playlistsLoading, error: playlistsError, getPlaylists, editVideoPlaylists } = usePlaylists();
+  const { user } = useAuth();
   const [selectedPlaylists, setSelectedPlaylists] = useState<number[]>([]);
   const [saving, setSaving] = useState(false);
   const [loadingPlaylists, setLoadingPlaylists] = useState(false);
 
   useEffect(() => {
-    // Загружаем плейлисты пользователя
-    getPlaylists();
+    if (user) {
+      // Загружаем плейлисты текущего пользователя
+      getPlaylists(user.id);
+    }
     
     // Загружаем плейлисты, в которых уже находится видео
     const loadVideoPlaylists = async () => {
@@ -40,7 +44,7 @@ export default function AddToPlaylistModal({ video, onClose }: AddToPlaylistModa
     };
     
     loadVideoPlaylists();
-  }, [getPlaylists, video.id]);
+  }, [getPlaylists, video.id, user?.id]);
 
   const handleCheckboxChange = (playlistId: number) => {
     setSelectedPlaylists(prev => {

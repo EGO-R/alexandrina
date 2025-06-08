@@ -9,13 +9,13 @@ export default function VideoCard({ id, name, preview, videoUrl, author, privacy
   const [imgError, setImgError] = useState(false);
   const imgSrc = imgError ? DEFAULT_IMAGES.thumbnail : preview;
 
-  return (
+    return (
     <div className="card group">
       <Link href={`/video/${id}`}>
         <div className="relative h-40 w-full overflow-hidden">
-          <Image
+                <Image
             src={imgSrc}
-            alt={name}
+                    alt={name}
             fill
             className="object-cover transform transition-transform group-hover:scale-105"
             onError={() => setImgError(true)}
@@ -28,21 +28,21 @@ export default function VideoCard({ id, name, preview, videoUrl, author, privacy
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
         </div>
-      </Link>
+            </Link>
 
-      <div className="p-4">
+            <div className="p-4">
         <Link href={`/video/${id}`}>
           <h3 className="font-semibold text-text-primary line-clamp-2 group-hover:text-primary transition-colors">
             {name}
           </h3>
-        </Link>
+                </Link>
         
         <Link href={`/channel/${author.id}`} className="mt-2 flex items-center">
           <span className="text-sm text-text-secondary hover:text-primary transition-colors">
-            {author.name}
+                    {author.name}
           </span>
-        </Link>
-      </div>
-    </div>
-  );
+                </Link>
+            </div>
+        </div>
+    );
 }

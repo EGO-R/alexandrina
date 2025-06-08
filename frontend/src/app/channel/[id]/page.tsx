@@ -55,7 +55,7 @@ export default function UserChannelPage() {
     });
     
     // Загружаем плейлисты пользователя
-    getPlaylists();
+    getPlaylists(userId);
   }, [userId, getUserById, getVideos, getPlaylists]);
 
   // Обработчик создания/редактирования плейлиста
@@ -76,7 +76,7 @@ export default function UserChannelPage() {
       setEditingPlaylist(null);
       
       // Обновляем список плейлистов
-      getPlaylists();
+      getPlaylists(userId);
     } catch (error) {
       console.error('Ошибка при сохранении плейлиста:', error);
     } finally {
@@ -95,7 +95,7 @@ export default function UserChannelPage() {
     try {
       await removePlaylist(playlistId);
       // Обновляем список плейлистов
-      getPlaylists();
+      getPlaylists(userId);
     } catch (error) {
       console.error('Ошибка при удалении плейлиста:', error);
     }
@@ -148,8 +148,8 @@ export default function UserChannelPage() {
       </div>
     );
     
-    // Фильтруем плейлисты по текущему пользователю
-    const userPlaylists = playlists.filter(playlist => playlist.author.id === userId);
+    // Фильтрация больше не нужна, так как бэкенд вернет только плейлисты нужного пользователя
+    const userPlaylists = playlists;
 
     return (
       <div>

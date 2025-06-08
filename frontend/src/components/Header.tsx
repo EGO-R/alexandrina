@@ -67,9 +67,9 @@ export default function Header() {
                 {user ? (
                     <form onSubmit={handleSearch} className="w-full max-w-md mx-4">
                         <div className="relative">
-                            <input
-                                type="text"
-                                placeholder="Поиск видео..."
+                <input
+                    type="text"
+                    placeholder="Поиск видео..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 className="w-full px-4 py-2 pr-10 rounded-full border-border focus:border-primary"
@@ -108,9 +108,9 @@ export default function Header() {
                                     aria-label="Меню пользователя"
                                 >
                                     <div className="relative w-9 h-9 overflow-hidden rounded-full border-2 border-primary">
-                                        <Image
+                                <Image
                                             src={avatarSrc}
-                                            alt={user.name}
+                                    alt={user.name}
                                             fill
                                             className="object-cover"
                                             unoptimized={true}
@@ -133,7 +133,7 @@ export default function Header() {
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5" />
                                             </svg>
                                             Мой канал
-                                        </Link>
+                            </Link>
                                         <button 
                                             onClick={handleLogout}
                                             className="block w-full text-left px-4 py-2 text-sm text-danger hover:bg-surface-hover flex items-center"

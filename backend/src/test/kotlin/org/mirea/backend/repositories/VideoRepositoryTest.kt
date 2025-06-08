@@ -167,10 +167,6 @@ class VideoRepositoryTest : RepositoryTest() {
     inner class Delete {
         @Test
         fun delete() {
-            val query = VideoRepositorySearchQuery.create(UserID(1)) {
-                id = VideoID(2)
-            }
-
             val expected = listOf(
                 VideoEntity(
                     id = VideoID(1),
@@ -185,7 +181,7 @@ class VideoRepositoryTest : RepositoryTest() {
             val expectedDeletedIds = listOf(VideoID(2))
 
             val actualDeletedIds = runBlocking {
-                videoRepository.delete(query)
+                videoRepository.delete(VideoID(2))
             }
 
             val actual = runBlocking {

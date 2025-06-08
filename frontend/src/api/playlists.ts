@@ -4,10 +4,15 @@ import { Playlist, PlaylistWithVideos, PlaylistCreateUpdateDto, PlaylistVideoUpd
 import { urlFromBack } from "@/api/urlUtils";
 
 /**
- * Получение всех плейлистов пользователя
+ * Получение плейлистов. Если указан userId, возвращает плейлисты конкретного пользователя,
+ * иначе возвращает все доступные плейлисты
  */
-export async function fetchPlaylists(): Promise<Playlist[]> {
-  const res = await fetchWithAuth(API_ENDPOINTS.playlists.list);
+export async function fetchPlaylists(userId?: number): Promise<Playlist[]> {
+  const endpoint = userId 
+    ? API_ENDPOINTS.playlists.getUserPlaylists(userId) 
+    : API_ENDPOINTS.playlists.list;
+
+  const res = await fetchWithAuth(endpoint);
 
   if (!res.ok) {
     throw new Error('Ошибка загрузки плейлистов');

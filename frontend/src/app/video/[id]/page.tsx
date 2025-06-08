@@ -16,7 +16,7 @@ export default function VideoPage() {
   const { currentVideo, loading, error, getVideoById } = useVideos();
   const [showPlaylistModal, setShowPlaylistModal] = useState(false);
 
-  useEffect(() => {
+    useEffect(() => {
     if (videoId) {
       getVideoById(videoId);
     }
@@ -73,9 +73,9 @@ export default function VideoPage() {
       <div className="max-w-4xl mx-auto">
         {/* Видеоплеер */}
         <div className="aspect-video bg-black mb-6 rounded-lg overflow-hidden shadow-lg">
-          <video
+            <video
             src={currentVideo.videoUrl}
-            controls
+                controls
             className="w-full h-full"
             poster={currentVideo.preview}
           />
@@ -100,7 +100,7 @@ export default function VideoPage() {
                   {currentVideo.author.name}
                 </span>
               </Link>
-              <div className="mt-4">
+            <div className="mt-4">
                 <span className="inline-block bg-secondary/10 text-secondary text-xs px-2 py-1 rounded-full">
                   {currentVideo.privacyType === "PRIVATE" ? "Приватное" : "Публичное"}
                 </span>
@@ -132,7 +132,7 @@ export default function VideoPage() {
                   </svg>
                   Добавить в плейлист
                 </button>
-              </div>
+                </div>
             )}
           </div>
         </div>
@@ -146,5 +146,5 @@ export default function VideoPage() {
         )}
       </div>
     </div>
-  );
+    );
 }

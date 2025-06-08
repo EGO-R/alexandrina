@@ -30,7 +30,7 @@ jwt:
 #      max-request-size: ${MAX_SIZE:5MB}
 logging:
   level:
-    root: info
+    root: debug
 s3:
   key-id: ${S3_KEY_ID}
   secret-key: ${S3_SECRET_KEY}

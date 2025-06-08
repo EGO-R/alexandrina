@@ -13,6 +13,7 @@ import org.mirea.backend.services.ContextManager
 import org.mirea.backend.services.DbTransactionManager
 import org.mirea.backend.services.video.VideoService
 import org.mirea.backend.utils.ids.PlaylistID
+import org.mirea.backend.utils.ids.UserID
 import org.mirea.backend.utils.ids.VideoID
 import org.springframework.stereotype.Service
 
@@ -35,10 +36,12 @@ class PlaylistService(
         return playlistWithAuthor
     }
 
-    suspend fun search(): List<PlaylistWithAuthor> {
+    suspend fun search(userId: UserID): List<PlaylistWithAuthor> {
         val currentUser = contextManager.getUser()
 
-        val query = PlaylistRepositorySearchQuery.create(currentUser) {}
+        val query = PlaylistRepositorySearchQuery.create(currentUser) {
+            userID = userId
+        }
         return playlistsRepository.searchPlaylistWithAuthor(query)
     }
 
@@ -83,7 +86,9 @@ class PlaylistService(
         videoService.getByIdSafe(id)
         val currentUser = contextManager.getUser()
 
-        val query = PlaylistRepositorySearchQuery.create(currentUser) {}
+        val query = PlaylistRepositorySearchQuery.create(currentUser) {
+            userID = currentUser.id
+        }
 
         val videoPlaylistIds = playlistsRepository.getVideoPlaylists(id, query)
             .mapTo(mutableSetOf()) { it.playlist.id }

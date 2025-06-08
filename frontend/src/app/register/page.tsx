@@ -68,27 +68,27 @@ export default function RegisterPage() {
                         <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-1">
                             Email
                         </label>
-                        <input
+                <input
                             id="email"
-                            type="email"
+                    type="email"
                             placeholder="Введите email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                             className="w-full"
-                            required
-                        />
+                    required
+                />
                     </div>
                     
                     <div>
                         <label htmlFor="password" className="block text-sm font-medium text-text-secondary mb-1">
                             Пароль
                         </label>
-                        <input
+                <input
                             id="password"
-                            type="password"
+                    type="password"
                             placeholder="Введите пароль (не менее 6 символов)"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                             className="w-full"
                             required
                             minLength={6}
@@ -106,13 +106,13 @@ export default function RegisterPage() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             className="w-full"
-                            required
-                        />
+                    required
+                />
                     </div>
                     
-                    <button
-                        type="submit"
-                        disabled={loading}
+                <button
+                    type="submit"
+                    disabled={loading}
                         className="btn btn-primary w-full py-3"
                     >
                         {loading ? (
@@ -124,8 +124,8 @@ export default function RegisterPage() {
                                 Регистрация...
                             </span>
                         ) : 'Зарегистрироваться'}
-                    </button>
-                </form>
+                </button>
+            </form>
 
                 <div className="mt-8 text-center">
                     <span className="text-text-secondary">Уже есть аккаунт? </span>

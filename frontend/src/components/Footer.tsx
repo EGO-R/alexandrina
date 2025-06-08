@@ -29,7 +29,7 @@ export default function Footer() {
                                 {authorInfo.phone}
                             </a>
                         </li>
-                    </ul>
+                </ul>
                 </div>
             </div>
         </footer>
