@@ -19,12 +19,10 @@ services:
       context: ./frontend
       args:
         - NEXT_PUBLIC_API_URL=/api
-        - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+        - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID:-change_me}
         - NEXT_PUBLIC_S3_BASE_URL=${NEXT_PUBLIC_S3_BASE_URL:-https://storage.yandexcloud.net}
         - NEXT_PUBLIC_S3_BUCKET=${NEXT_PUBLIC_S3_BUCKET:-alexandrina}
-    # Порт 3000 теперь не надо публиковать наружу, так как доступ будет через nginx
-    # ports:
-    #   - "3000:3000"
+        - NEXT_PUBLIC_OAUTH2_ENABLED=${OAUTH2_ENABLED:-false}
     depends_on:
       - backend
     networks:
@@ -34,9 +32,6 @@ services:
   backend:
     build:
       context: ./backend
-    # Порт 8080 теперь не надо публиковать наружу, так как доступ будет через nginx
-    # ports:
-    #   - "8080:8080"
     depends_on:
       - db
     environment:
@@ -44,8 +39,9 @@ services:
       - PG_USERNAME=${POSTGRES_USER:-postgres}
       - PG_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - JWT_SECRET=${JWT_SECRET:-default_jwt_secret_key}
-      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-change_me}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET:-change_me}
+      - OAUTH2_ENABLED=${OAUTH2_ENABLED:-false}
       - S3_KEY_ID=${S3_KEY_ID}
       - S3_SECRET_KEY=${S3_SECRET_KEY}
       - S3_REGION=${S3_REGION}

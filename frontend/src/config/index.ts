@@ -10,6 +10,7 @@ export const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 // Для клиентских запросов используем относительные пути, которые будут проксироваться через Next.js
 export const API_URL = typeof window !== 'undefined' ? '' : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080');
 export const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+export const OAUTH2_ENABLED = process.env.NEXT_PUBLIC_OAUTH2_ENABLED === 'true';
 
 // Настройки S3 хранилища
 export const S3_CONFIG = {

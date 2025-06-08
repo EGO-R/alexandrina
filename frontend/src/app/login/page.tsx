@@ -6,7 +6,7 @@ import {setAuthData} from '@/store/userSlice';
 import {useRouter, useSearchParams} from 'next/navigation';
 import Link from 'next/link';
 import {createContext, useContext} from 'react';
-import {Logger} from '@/config';
+import {Logger, OAUTH2_ENABLED} from '@/config';
 
 // Компонент для обработки параметров URL
 function SearchParamsHandler() {
@@ -129,39 +129,43 @@ export default function LoginPage() {
                 </button>
             </form>
 
-                <div className="relative my-6">
-                    <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-300 dark:border-gray-700"></div>
+                {OAUTH2_ENABLED && (
+                  <>
+                    <div className="relative my-6">
+                        <div className="absolute inset-0 flex items-center">
+                            <div className="w-full border-t border-gray-300 dark:border-gray-700"></div>
+                        </div>
+                        <div className="relative flex justify-center text-sm">
+                            <span className="px-2 bg-surface text-text-secondary">Или</span>
+                        </div>
                     </div>
-                    <div className="relative flex justify-center text-sm">
-                        <span className="px-2 bg-surface text-text-secondary">Или</span>
-                    </div>
-                </div>
 
-                <button
-                    onClick={handleGoogleLogin}
-                    className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm bg-white dark:bg-gray-800 text-text-primary hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                >
-                    <svg viewBox="0 0 24 24" width="16" height="16" className="mr-2">
-                        <path 
-                            fill="#4285F4" 
-                            d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"
-                        />
-                        <path 
-                            fill="#34A853" 
-                            d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-3.98v3.09c1.97 3.92 6.02 6.62 10.71 6.62z"
-                        />
-                        <path 
-                            fill="#FBBC05" 
-                            d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29v-3.09h-3.98c-.81 1.61-1.27 3.41-1.27 5.38s.46 3.77 1.27 5.38l3.98-3.09z"
-                        />
-                        <path 
-                            fill="#EA4335" 
-                            d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42c-2.07-1.94-4.78-3.13-8.02-3.13-4.69 0-8.74 2.7-10.71 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"
-                        />
-                    </svg>
-                    Войти через Google
-                </button>
+                    <button
+                        onClick={handleGoogleLogin}
+                        className="flex items-center justify-center w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm bg-white dark:bg-gray-800 text-text-primary hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    >
+                        <svg viewBox="0 0 24 24" width="16" height="16" className="mr-2">
+                            <path 
+                                fill="#4285F4" 
+                                d="M23.745 12.27c0-.79-.07-1.54-.19-2.27h-11.3v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z"
+                            />
+                            <path 
+                                fill="#34A853" 
+                                d="M12.255 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96h-3.98v3.09c1.97 3.92 6.02 6.62 10.71 6.62z"
+                            />
+                            <path 
+                                fill="#FBBC05" 
+                                d="M5.525 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29v-3.09h-3.98c-.81 1.61-1.27 3.41-1.27 5.38s.46 3.77 1.27 5.38l3.98-3.09z"
+                            />
+                            <path 
+                                fill="#EA4335" 
+                                d="M12.255 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42c-2.07-1.94-4.78-3.13-8.02-3.13-4.69 0-8.74 2.7-10.71 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z"
+                            />
+                        </svg>
+                        Войти через Google
+                    </button>
+                  </>
+                )}
 
                 <div className="mt-8 text-center">
                     <span className="text-text-secondary">Ещё нет аккаунта? </span>
