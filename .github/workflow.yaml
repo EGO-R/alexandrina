@@ -1,0 +1,70 @@
+name: Alexandrina CI / CD
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    paths-ignore:
+      - 'LICENSE'
+      - '*.md'
+  pull_request:
+    branches: [ "main", "master" ]
+    paths-ignore:
+      - 'LICENSE'
+      - '*.md'
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Prepare Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Run backend tests
+        working-directory: backend
+        run: ./gradlew test
+
+  deploy:
+    needs: test-backend
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add SSH key to agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy via SSH
+        env:
+          SSH_USER:  ${{ secrets.SSH_USER }}
+          SSH_HOST:  ${{ secrets.SSH_HOST }}
+        run: |
+          ssh "$SSH_USER@$SSH_HOST" <<'EOF'
+            set -euo pipefail
+
+            cd ~/alexandrina
+
+            git pull --ff-only
+
+            sudo docker-compose down --remove-orphans
+            sudo docker-compose up --build -d
+          EOF
