@@ -65,6 +65,6 @@ jobs:
 
             git pull --ff-only
 
-            sudo docker-compose down --remove-orphans
-            sudo docker-compose up --build -d
+            sudo docker stop $(sudo docker ps -a -q)
+            sudo docker compose up --build -d
           EOF
