@@ -1,13 +1,6 @@
 spring:
   application:
     name: backend
-  datasource:
-    url: a
-    password: a
-    username: a
-    driver-class-name: org.postgresql.Driver
-  jooq:
-    sql-dialect: postgres
   security:
     oauth2:
       client:

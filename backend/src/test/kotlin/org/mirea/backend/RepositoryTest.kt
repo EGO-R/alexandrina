@@ -9,7 +9,6 @@ import org.testcontainers.junit.jupiter.Testcontainers
 
 @ActiveProfiles("test")
 @SpringBootTest
-@Testcontainers
 abstract class RepositoryTest {
     companion object {
         @Container

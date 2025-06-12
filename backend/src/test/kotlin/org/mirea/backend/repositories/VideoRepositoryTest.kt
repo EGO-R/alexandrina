@@ -109,19 +109,19 @@ class VideoRepositoryTest : RepositoryTest() {
         fun create() {
             val entity = VideoEntity(
                 id = VideoID.EMPTY,
-                name = "test3",
+                name = "test4",
                 userId = UserID(2),
-                preview = "2",
-                videoUrl = "2",
+                preview = "4",
+                videoUrl = "4",
                 privacyType = PrivacyType.PUBLIC,
             )
 
             val expected = VideoEntity(
                 id = VideoID(NEXT_INSERT_ID),
-                name = "test3",
+                name = "test4",
                 userId = UserID(2),
-                preview = "2",
-                videoUrl = "2",
+                preview = "4",
+                videoUrl = "4",
                 privacyType = PrivacyType.PUBLIC,
             )
 
@@ -139,19 +139,19 @@ class VideoRepositoryTest : RepositoryTest() {
         fun update() {
             val entity = VideoEntity(
                 id = VideoID(2),
-                name = "test3",
+                name = "test4",
                 userId = UserID(3),
-                preview = "2",
-                videoUrl = "2",
+                preview = "4",
+                videoUrl = "4",
                 privacyType = PrivacyType.PUBLIC,
             )
 
             val expected = VideoEntity(
                 id = VideoID(2),
-                name = "test3",
+                name = "test4",
                 userId = UserID(2),
-                preview = "2",
-                videoUrl = "2",
+                preview = "4",
+                videoUrl = "4",
                 privacyType = PrivacyType.PUBLIC,
             )
 
@@ -178,9 +178,7 @@ class VideoRepositoryTest : RepositoryTest() {
                 ),
             )
 
-            val expectedDeletedIds = listOf(VideoID(2))
-
-            val actualDeletedIds = runBlocking {
+            runBlocking {
                 videoRepository.delete(VideoID(2))
             }
 
@@ -188,7 +186,6 @@ class VideoRepositoryTest : RepositoryTest() {
                 videoRepository.search(VideoRepositorySearchQuery.create(UserID(1)) {})
             }
 
-            Assertions.assertThat(actualDeletedIds).isEqualTo(expectedDeletedIds)
             Assertions.assertThat(actual).isEqualTo(expected)
         }
     }

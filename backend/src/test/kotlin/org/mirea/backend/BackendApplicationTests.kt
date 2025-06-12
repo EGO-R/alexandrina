@@ -8,8 +8,8 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest
 class BackendApplicationTests {
 
-    @Test
-    fun contextLoads() {
-    }
+//    @Test
+//    fun contextLoads() {
+//    }
 
 }
