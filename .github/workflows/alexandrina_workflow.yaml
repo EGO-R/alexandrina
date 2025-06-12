@@ -31,7 +31,7 @@ jobs:
 
       - name: Run backend tests
         working-directory: backend
-        run: sudo ./gradlew test --no-daemon
+        run: ./gradlew test --no-daemon
 
   deploy:
     needs: test-backend
