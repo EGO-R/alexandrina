@@ -36,7 +36,6 @@ import org.springframework.security.web.server.authentication.HttpStatusServerEn
 
 @Configuration
 @EnableWebFluxSecurity
-//@EnableMethodSecurity
 class SecurityConfig {
     @Value("\${spring.security.oauth2.client.registration.google.client-id}")
     private lateinit var clientId: String
@@ -73,7 +72,6 @@ class SecurityConfig {
         
         oauth2Login {
             authenticationSuccessHandler = oAuth2LoginSuccessHandler
-//            authenticationFailureHandler = oAuth2LoginFailureHandler
         }
     }
 
